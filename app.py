@@ -460,7 +460,6 @@ elif page == "Predict":
             else:
                 st.success("🟢 LEGIT (model prediction)")
 
-        st.markdown("**Note:** This is a model prediction (decision-support). Combine with business rules and human review before taking action.")
-
+ 
 # -- end pages --
 # No footer text (removed per request)
