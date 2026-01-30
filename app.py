@@ -180,7 +180,7 @@ page = st.sidebar.radio("", ["Overview", "Dataset", "EDA", "Models & Train (XGBo
 
 # ---------------- Pages ----------------
 if page == "Overview":
-    st.title("💳 Fraud Detection — XGBoost (production)")
+    st.title("Fraud Transaction prediction")
     st.markdown("""
     #### Problem (expanded)
     Fraudulent transactions cause direct monetary loss and indirect costs such as manual review, customer churn and reputational damage.
@@ -192,15 +192,14 @@ if page == "Overview":
     - Keep features small and explainable for fast inference and easy integration.  
     - Use deterministic label-encoding + StandardScaler for reproducible preprocessing.  
     - Handle class imbalance with SMOTE during training so the model learns fraud patterns.  
-    - Use **XGBoost as production model** because it captures non-linear interactions, includes regularization, and is optimized for speed.  
+    - Use **XGBoost as production model** because it captures non-linear interactions, includes regularization and is optimized for speed.  
     - Provide baseline models for transparency and model-selection context.
 
     #### Objective & Deliverables
     1. Cleaned dataset + reproducible preprocessing.  
-    2. EDA with boxplots, distributions, correlation, and class-balance checks.  
-    3. Baseline model comparison (Logistic, KNN, DecisionTree, RandomForest, XGBoost baseline if available).  
-    4. Production XGBoost artifact (trained externally or via separate training script) displayed if present.  
-    5. Interactive Predict UI returning probability (%) and a human-friendly risk label.
+    2. EDA with boxplots, distributions, correlation and class-balance checks.  
+    3. Baseline model comparison (Logistic, KNN, DecisionTree, RandomForest, XGBoost).   
+    4. Interactive Predict UI returning probability (%) and a human-friendly risk label.
     """)
     if not XGBOOST_AVAILABLE:
         st.warning("XGBoost is NOT installed in this environment. Production training/tuning is disabled until you install XGBoost (`pip install xgboost`).")
@@ -302,9 +301,9 @@ elif page == "Models & Train (XGBoost)":
     st.dataframe(df_encoded.head(6))
 
     # --------------- Baseline comparison (auto) ----------------
-    st.markdown("### Baseline comparison (automatic)")
+    st.markdown("### Baseline comparison")
     if "baseline_results" not in st.session_state:
-        with st.spinner("Running baseline models (Logistic / KNN / DecisionTree / RandomForest / XGBoost baseline if available)..."):
+        with st.spinner("Running baseline models (Logistic / KNN / DecisionTree / RandomForest / XGBoost"):
             st.session_state["baseline_results"] = baseline_comparison(df_encoded)
 
     results = st.session_state["baseline_results"]
