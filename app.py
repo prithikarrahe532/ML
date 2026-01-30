@@ -321,7 +321,7 @@ elif page == "Models & Train (XGBoost)":
     st.markdown("---")
 
     # --------------- Production model display ----------------
-    st.subheader("Production model (saved XGBoost artifact)")
+    st.subheader("Production model")
     if os.path.exists(MODEL_PATH) and os.path.exists(SCALER_PATH):
         model = load_pickle(MODEL_PATH)
         scaler = load_pickle(SCALER_PATH)
@@ -337,7 +337,6 @@ elif page == "Models & Train (XGBoost)":
         y_pred = model.predict(X_test_s)
         report = classification_report(y_test, y_pred, output_dict=False)
         cm = confusion_matrix(y_test, y_pred)
-        st.subheader("Saved model classification report (test set)")
         st.text(report)
         st.subheader("Confusion matrix")
         fig, ax = plt.subplots(figsize=(5, 4))
@@ -376,8 +375,7 @@ elif page == "Models & Train (XGBoost)":
     st.write(
         "- **Better accuracy / F1 on tabular data:** gradient boosting captures non-linear feature interactions that simple linear models miss.  \n"
         "- **Regularization & robustness:** XGBoost provides shrinkage (learning_rate), tree regularization and is less prone to overfitting than naive trees.  \n"
-        "- **Speed and production maturity:** optimized implementation with multi-threading and predictable inference latency.  \n"
-        "- **Interpretability & tooling:** feature importance and SHAP/values for post-hoc explanation while keeping inference fast."
+        "- **Speed and production maturity:** optimized implementation with multi-threading and predictable inference latency."
     )
 
 elif page == "Predict":
